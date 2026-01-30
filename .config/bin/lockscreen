@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Get screen resolution
+resolution=$(xdpyinfo | grep dimensions | awk '{print $2}')
+
+# Prepare black background and center the image
+magick -size $resolution xc:black /tmp/lockbg.png
+magick composite -gravity center ~/Pictures/arch-black.png /tmp/lockbg.png /tmp/lockbg-centered.png
+
+# Lock screen using the centered image
+/usr/bin/i3lock -i /tmp/lockbg-centered.png --nofork
+
+
+
